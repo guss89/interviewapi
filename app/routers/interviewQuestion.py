@@ -5,7 +5,7 @@ from app import routers, schemas, database, services
 #Schemas
 from app.schemas.interviewQuestion import InterviewQuestionOut, InterviewQuestionCreate, InterviewQuestionUpdate
 #Services
-from app.services.interviewQuestion import get_all_interviewQuestion, get_all_intervireQuestion_id, create_interviewQuestion, update_interviewQuestion, delete_interviewQuestion
+from app.services.interviewQuestion import get_all_interviewQuestion, get_all_intervireQuestion_id, create_interviewQuestion, update_interviewQuestion, delete_interviewQuestion, get_interviews
 
 router = APIRouter(prefix="/interviewQuestions", tags=["InterviewQuestions"])
 
@@ -41,3 +41,7 @@ def delete_endpoint(interviewQuestion_id:int, db:Session = Depends(get_db)):
     if not delete_iq:
         raise HTTPException(status_code=404, detail="Interview not found")
     return delete_iq
+
+@router.get("/get-interviews/{interview_id}",)
+def get_main_interviews(interview_id:int,db: Session = Depends(get_db)):
+    return get_interviews(db, interview_id = interview_id)
