@@ -84,7 +84,8 @@ def get_interviews(db: Session, interview_id: int) -> dict:
     for option in cat_answers:
         options_by_type[option.option_type].append({
             "id": option.id,
-            "description": option.description
+            "description": option.description,
+            "emoji": option.emoji
         })
 
     # Construir la lista de preguntas con sus opciones correspondientes por tipo
