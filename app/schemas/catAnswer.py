@@ -6,7 +6,7 @@ class CatAnswerBase(BaseModel):
     description: str = Field(..., max_length=255)
     value: int
     option_type:str = Field(..., max_length=25)
-    emoji: str = Field(..., max_length=100)
+    emoji: Optional[str]
 
 class CatAnswerCreate(CatAnswerBase):
     pass
