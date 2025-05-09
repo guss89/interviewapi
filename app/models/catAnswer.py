@@ -9,3 +9,4 @@ class CatAnswer(Base):
     description = Column(String(255), nullable=False)
     value = Column(Integer, default=0)
     option_type = Column(String (25), nullable=False)
+    emoji = Column(String(255), nullable=False)
