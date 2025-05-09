@@ -1,17 +1,17 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
-class WaiterBase(BaseModel):
+class ClientBase(BaseModel):
     name: str = Field(..., max_length=100)
-    store_id: Optional[int]
+    phone: str = Field(..., max_length=25)
 
-class WaiterCreate(WaiterBase):
-    store_id: int
-
-class WaiterUpdate(WaiterBase):
+class ClientCreate(ClientBase):
     pass
 
-class WaiterOut(WaiterBase):
+class ClientUpdate(ClientBase):
+    pass
+
+class ClientOut(ClientBase):
     id: int
 
     class Config:

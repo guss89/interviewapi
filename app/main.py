@@ -11,6 +11,8 @@ from app.routers import catAnswer
 from app.routers import interviewQuestion
 from app.routers import answer
 from app.routers import hostess
+from app.routers import client
+from app.routers import comments
 
 # Crear las tablas en la base de datos (automáticamente)
 Base.metadata.create_all(bind=engine)
@@ -30,3 +32,5 @@ app.include_router(catAnswer.router)
 app.include_router(interviewQuestion.router)
 app.include_router(answer.router)
 app.include_router(hostess.router)
+app.include_router(client.router)
+app.include_router(comments.router)

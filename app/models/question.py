@@ -7,3 +7,4 @@ class Question(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     description = Column(String(255), nullable=False)
+    question_type = Column(String(25), nullable=False)

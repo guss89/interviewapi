@@ -1,18 +1,16 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
-
-class QuestionBase(BaseModel):
+class CommentsBase(BaseModel):
     description: str = Field(..., max_length=255)
-    question_type: str = Field(..., max_length=255)
 
-class QuestionCreate(QuestionBase):
+class CommentsCreate(CommentsBase):
     pass
 
-class QuestionUpdate(QuestionBase):
+class CommentsUpdate(CommentsBase):
     pass
 
-class QuestionOut(QuestionBase):
+class CommentsOut(CommentsBase):
     id: int
 
     class Config:

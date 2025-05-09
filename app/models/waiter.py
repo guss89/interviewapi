@@ -7,7 +7,6 @@ class Waiter(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), nullable=False)
-    phone = Column(String(10), nullable=True)
     store_id = Column(Integer, ForeignKey("stores.id"), nullable=False)
 
      # Esto crea la relación con SQLAlchemy
