@@ -14,6 +14,9 @@ from app.routers import hostess
 from app.routers import client
 from app.routers import comments
 
+#Bot para prueba
+from app.routers import chatBot
+
 # Crear las tablas en la base de datos (automáticamente)
 Base.metadata.create_all(bind=engine)
 
@@ -34,3 +37,6 @@ app.include_router(answer.router)
 app.include_router(hostess.router)
 app.include_router(client.router)
 app.include_router(comments.router)
+
+#Bot
+app.include_router(chatBot.router)
