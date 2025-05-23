@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.database import engine, Base
 from app.config import settings
+from fastapi.middleware.cors import CORSMiddleware
 
 #routes
 from app.routers import store
@@ -24,6 +25,15 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
+)
+
+# Configuración de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://dev-xen.com"],  # Solo tu frontend
+    allow_credentials=True,
+    allow_methods=["*"],  # O restringe a ["POST"] si solo usas POST
+    allow_headers=["*"],  # O define encabezados específicos si prefieres
 )
 
 # Incluir los routers
