@@ -5,3 +5,4 @@ SQLAlchemy
 python-dotenv
 pymysql
 openai>=1.0.0
+twilio

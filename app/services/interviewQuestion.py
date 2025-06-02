@@ -1,3 +1,6 @@
+import os
+from app.services.message import send_whatsapp_message
+
 from sqlalchemy.orm import Session
 from collections import defaultdict
 from sqlalchemy import join, select
@@ -143,7 +146,19 @@ def save_interview_data(db: Session, data: dict):
 
         # 6. Confirmar transacción
         db.commit()
-        return {"detail":"Interview save successfully"}
+
+        # 7. Enviar mensaje WhatsApp usando Twilio
+        phone_number = data["client"]["phone"]
+        message = "Gracias por completar la entrevista."
+
+        sid, status = send_whatsapp_message(phone_number, message)
+
+
+        return {
+            "detail": "Interview saved successfully",
+            "whatsapp_sid": sid,
+            "whatsapp_status": status
+        }
     except Exception as e:
         db.rollback()  # Revierte los cambios si algo falla
         return {"detail":f"Error al guardar encuesta: {e}"}
