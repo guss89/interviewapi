@@ -1,5 +1,5 @@
 import os
-from app.services.message import send_whatsapp_message
+from app.services.message import send_sms
 
 from sqlalchemy.orm import Session
 from collections import defaultdict
@@ -151,7 +151,7 @@ def save_interview_data(db: Session, data: dict):
         phone_number = data["client"]["phone"]
         message = "Gracias por completar la entrevista."
 
-        sid, status = send_whatsapp_message(phone_number, message)
+        sid, status = send_sms(phone_number)
 
 
         return {
