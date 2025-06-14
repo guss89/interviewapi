@@ -1,4 +1,5 @@
 import os
+from enum import Enum
 from app.services.message import send_sms
 
 from sqlalchemy.orm import Session
@@ -20,6 +21,7 @@ from app.models.waiter import Waiter
 from app.models.hostess import Hostess
 from app.models.answer import Answer
 from app.models.comments import Comments
+from app.models.codeClient import CodeClient
 
 def get_all_interviewQuestion(db:Session):
     return db.query(InterviewQuestion).all()
@@ -118,11 +120,11 @@ def save_interview_data(db: Session, data: dict):
         db.flush()  # Para obtener client.id
 
         # 2. Buscar mesero (puedes hacer lógica más robusta si es necesario)
-        waiter = db.query(Waiter).filter_by(name=data["waiter"]).first()
-        if not waiter:
-            waiter = Waiter(name=data["waiter"], store_id=data["store_id"])
-            db.add(waiter)
-            db.flush()
+        #waiter = db.query(Waiter).filter_by(name=data["waiter"]).first()
+        #if not waiter:
+        #    waiter = Waiter(name=data["waiter"], store_id=data["store_id"])
+        #    db.add(waiter)
+        #    db.flush()
 
         # 3. Buscar hostess
         hostess = db.query(Hostess).get(data["hostess"])
@@ -133,7 +135,7 @@ def save_interview_data(db: Session, data: dict):
         # 4. Agregar respuestas
         for answer_data in data["answers"]:
             answer = Answer(
-                waiter_id = waiter.id,
+                waiter_id = data['waiter'],
                 hostess_id = data["hostess"],
                 interview_question_id=answer_data["interview_question_id"],
                 cat_answer_id=answer_data["cat_answer_id"]
@@ -144,14 +146,17 @@ def save_interview_data(db: Session, data: dict):
         comment = Comments( description=data["comments"])
         db.add(comment)
 
-        # 6. Confirmar transacción
-        db.commit()
-
-        # 7. Enviar mensaje WhatsApp usando Twilio
+        
+        # 6. Enviar mensaje WhatsApp usando Twilio
         phone_number = data["client"]["phone"]
-        message = "Gracias por completar la entrevista."
+        sid, status, presentCode = send_sms(phone_number)
 
-        sid, status = send_sms(phone_number)
+        # 7 CodeClient
+        codeClient = CodeClient(codeClient=str(presentCode), client_id = client.id)
+        db.add(codeClient)
+
+        # 8. Confirmar transacción
+        db.commit()
 
 
         return {

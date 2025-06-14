@@ -10,7 +10,7 @@ class ClientSchema(BaseModel):
     phone: int
 
 class InterviewRequest(BaseModel):
-    waiter: str
+    waiter: int
     store_id: int
     interview_id: int
     hostess: int
