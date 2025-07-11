@@ -21,9 +21,9 @@ class Settings:
     )
 
     # Seguridad (puedes agregarlo después si haces autenticación)
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "supersecreto")
+    SECRET_KEY: str = "Ut_kOosRyUrS4cBGOZBSyPEN7PYRekDoB4DqJBoLsH_GfpNwzslDdzNljOZdv0an"
     ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
 # Crear una instancia para usar en la app
 settings = Settings()

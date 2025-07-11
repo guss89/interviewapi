@@ -11,4 +11,4 @@ class Waiter(Base):
 
      # Esto crea la relación con SQLAlchemy
     store = relationship("Store", back_populates="waiters")
-    answers = relationship("Answer", back_populates="waiter")
+    answers = relationship("Answer", back_populates="waiter", cascade="all, delete")

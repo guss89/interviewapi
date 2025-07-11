@@ -15,6 +15,8 @@ from app.routers import hostess
 from app.routers import client
 from app.routers import comments
 
+from app.routers import auth
+
 #Bot para prueba
 from app.routers import chatBot
 
@@ -30,7 +32,10 @@ app = FastAPI(
 # Configuración de CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://dev-xen.com"],  # Solo tu frontend
+    allow_origins=[
+        "https://dev-xen.com",
+        "http://127.0.0.1:5500",
+        ],  # Solo tu frontend
     allow_credentials=True,
     allow_methods=["*"],  # O restringe a ["POST"] si solo usas POST
     allow_headers=["*"],  # O define encabezados específicos si prefieres
@@ -48,5 +53,4 @@ app.include_router(hostess.router)
 app.include_router(client.router)
 app.include_router(comments.router)
 
-#Bot
-app.include_router(chatBot.router)
+app.include_router(auth.router)

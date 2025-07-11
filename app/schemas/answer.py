@@ -6,6 +6,7 @@ class AnswerBase(BaseModel):
     interview_question_id: int = Field(..., description="ID Interview")
     waiter_id: int = Field(..., description="ID Waiter")
     hostess_id: int = Field(..., description="ID Hostess")
+    client_id: Optional[int] = Field(None, description="ID Client")
 
 class AnswerCreate(AnswerBase):
     cat_answer_id: int

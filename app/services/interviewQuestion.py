@@ -138,22 +138,23 @@ def save_interview_data(db: Session, data: dict):
                 waiter_id = data['waiter'],
                 hostess_id = data["hostess"],
                 interview_question_id=answer_data["interview_question_id"],
-                cat_answer_id=answer_data["cat_answer_id"]
+                cat_answer_id=answer_data["cat_answer_id"],
+                client_id = client.id
             )
             db.add(answer)
 
         # 5. Agregar comentario
-        comment = Comments( description=data["comments"])
+        comment = Comments( description=data["comments"], client_id = client.id)
         db.add(comment)
 
         
         # 6. Enviar mensaje WhatsApp usando Twilio
-        phone_number = data["client"]["phone"]
-        sid, status, presentCode = send_sms(phone_number)
+        #phone_number = data["client"]["phone"]
+        #sid, status, presentCode = send_sms(phone_number)
 
         # 7 CodeClient
-        codeClient = CodeClient(codeClient=str(presentCode), client_id = client.id)
-        db.add(codeClient)
+        #codeClient = CodeClient(codeClient=str(presentCode), client_id = client.id)
+        #db.add(codeClient)
 
         # 8. Confirmar transacción
         db.commit()
@@ -161,8 +162,6 @@ def save_interview_data(db: Session, data: dict):
 
         return {
             "detail": "Interview saved successfully",
-            "whatsapp_sid": sid,
-            "whatsapp_status": status
         }
     except Exception as e:
         db.rollback()  # Revierte los cambios si algo falla

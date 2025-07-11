@@ -6,3 +6,6 @@ python-dotenv
 pymysql
 openai>=1.0.0
 twilio
+python-jose[cryptography]
+bcrypt<4.1.0
+passlib[bcrypt]

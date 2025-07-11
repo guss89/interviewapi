@@ -3,6 +3,7 @@ from typing import Optional
 
 class CommentsBase(BaseModel):
     description: str = Field(..., max_length=255)
+    client_id: Optional[int] = None
 
 class CommentsCreate(CommentsBase):
     pass
@@ -15,3 +16,4 @@ class CommentsOut(CommentsBase):
 
     class Config:
         from_attributes = True 
+        client_id: Optional[int] = None
