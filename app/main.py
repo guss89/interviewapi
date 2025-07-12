@@ -35,6 +35,7 @@ app.add_middleware(
     allow_origins=[
         "https://dev-xen.com",
         "https://interal-control.dev-xen.com",
+        "http://127.0.0.1:5500/"
         ],  # Solo tu frontend
     allow_credentials=True,
     allow_methods=["*"],  # O restringe a ["POST"] si solo usas POST
