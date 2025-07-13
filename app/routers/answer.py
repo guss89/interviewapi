@@ -5,7 +5,7 @@ from app import routers, schemas, database, services
 #Schemas
 from app.schemas.answer import AnswerCreate, AnswerUpdate, AnswerOut
 #Services
-from app.services.answer import get_all_answer, get_all_by_waiter_id, create_answer, get_rating_by_waiter
+from app.services.answer import get_all_answer, get_all_by_waiter_id, create_answer, get_rating_by_waiter, get_avg_by_question
 
 router = APIRouter(prefix="/answers", tags=["Answers"])
 
@@ -31,3 +31,7 @@ def create(Answer: AnswerCreate, db:Session = Depends(get_db)):
 @router.get("/rating/all")
 def get__all_rating(db:Session = Depends(get_db)):
     return get_rating_by_waiter(db=db)
+
+@router.get("/avg/all")
+def get_all_avg_handler(db:Session = Depends(get_db)):
+    return get_avg_by_question(db=db)
