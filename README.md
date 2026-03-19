@@ -26,13 +26,6 @@ Pydantic
 
 📦 Endpoints principales
 
-GET / → Endpoint base
-
-GET /items → Obtener lista de datos
-
-POST /items → Crear nuevo registro
-
-(Ajustar según tus endpoints reales)
 
 ⚙️ Instalación y ejecución
 
